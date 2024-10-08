@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/src/assets/img/navbar/ballPadel.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Padel Match</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+      #loading {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        z-index: 9999;
+        font-size: 24px;
+        text-align: center;
+        opacity: 0.9;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #loading img {
+        width: 100px;
+        animation: spin 2s linear infinite;
+      }
+
+      #loading.hide {
+        display: none;
+      }
+
+      .loading-text {
+        margin-top: 30px;
+        font-size: 25px;
+        color: #b0fc33;
+      }
+
+      .loading-text.hide {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/src/assets/img/navbar/pelotaNav.png" alt="Pelota girando" />
+      <p class="loading-text">Cargando...</p>
+      <p class="loading-text hide">Loading...</p>
+      <p class="loading-text hide">Chargement...</p>
+    </div>
+
+    <div id="app"></div>
+
+    <script type="module" src="/src/main.js"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      function showLoadingTexts(duration) {
+        const texts = document.querySelectorAll(".loading-text");
+        let currentIndex = 0;
+
+        const showNextText = () => {
+          texts[currentIndex].classList.add("hide");
+
+          currentIndex++;
+
+          if (currentIndex >= texts.length) {
+            currentIndex = 0;
+          }
+
+          texts[currentIndex].classList.remove("hide");
+
+          setTimeout(showNextText, duration);
+        };
+
+        showNextText();
+      }
+
+      window.addEventListener("load", function () {
+        const loadingElement = document.getElementById("loading");
+
+        loadingElement.classList.remove("hide");
+
+        const loadingDuration = 1500;
+
+        const textDuration = 500;
+
+        showLoadingTexts(textDuration);
+
+        setTimeout(() => {
+          loadingElement.classList.add("hide");
+        }, loadingDuration);
+      });
+    </script>
+  </body>
+</html>
